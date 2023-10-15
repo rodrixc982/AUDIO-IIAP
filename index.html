@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>IIAP</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main-controls">
+            <br>
+            <label id="visual">VISUAL</label>
+            <br>
+            <form action="procesar_archivo.py" method="post" enctype="multipart/form-data">
+                <label for="archivo_audio">Selecciona un archivo de audio:</label>
+                <input type="file" name="archivo_audio" id="archivo_audio" accept=".mp3, .wav, .ogg">
+                <input type="submit" value="Subir archivo">
+                <div id="resultado"></div>
+
+            </form>
+
+            <select id="scale" onchange="YAxisMarks()">
+                <option value="Linear">Escala: Lineal</option>
+                <option value="Mel" selected>Escala: Miel</option>
+            </select>
+            <select id="f_min">
+                <option value="10">Frequencia Mínima: 10 Hz</option>
+                <option value="20">Frequencia Mínima: 20 Hz</option>
+                <option value="30">Frequencia Mínima: 30 Hz</option>
+                <option value="40">Frequencia Mínima: 40 Hz</option>
+                <option value="50" selected>Frequencia Mínima: 50 Hz</option>
+                <option value="80">Frequencia Mínima: 80 Hz</option>
+                <option value="100">Frequencia Mínima: 100 Hz</option>
+            </select>
+            <select id="f_max">
+                <option value="1000">Frequencia Máxima: 1 KHz</option>
+                <option value="2000">Frequncia Máxima: 2 KHz</option>
+                <option value="3000">Frequencia Máxima: 3 KHz</option>
+                <option value="4000">Frequência Máxima: 4 KHz</option>
+                <option value="5000">Frequencia Máxima: 5 KHz</option>
+                <option value="10000" selected>Frequencia Máxima: 10 KHz</option>
+                <option value="15000">Frequencia Máxima: 15 KHz</option>
+                <option value="20000">Frequencia Máxima: 20 KHz</option>
+            </select>
+            <br>
+            <br>
+            <select id="speed" onchange="PlotSpectro1()">
+                <option value="1">Speed: 1</option>
+                <option value="2">Velocidad: 2</option>
+                <option value="3">Velocidad: 3</option>
+                <option value="4" selected>Velocidad: 4</option>
+                <option value="5">Velocidade: 5</option>
+            </select>
+            <select id="colormap" onchange="plot_colormap()">
+                <option value="jet">Color de Mapa: Frio</option>
+                <option value="hot" selected>Color de Mapa: Caliente</option>
+                <option value="Greens">Color de Mapa: Blanco/Verde</option>
+                <option value="summer">Color de Mapa: Verde</option>
+                <option value="viridis">Color de Mapa: morado</option>
+                <option value="turbo">Color de Mapa: Granada azul</option>
+                <option value="Blues">Color de Mapa: Blanco/Azul</option>
+                <option value="terrain">Color de Mapa: Azul/Marron</option>
+                <option value="winter">Color de Mapa: Azul/Verde</option>
+                <option value="binary">Color de Mapa: Blanco/Negro</option>
+                <option value="RdPu">Color de Mapa: Blanco/Púrpura/Rosa</option>
+                <option value="gist_gray">Color de Mapa: Negro/Gris</option>
+            </select>
+
+            <label>SENSIBILIDAD </label><input id="sensibility" type="range" value="60" min="10" max="100" oninput="this.nextElementSibling.value = this.value">
+            <output id="output_sensibility"> 60 </output> dB
+            <label>ANDANTE</label><input type="checkbox" id="scrolling" checked> <label>PARADO </label>
+            <input type="checkbox" id="stop">
+            <br>
+            <br>
+            <label>PARÁMETROS</label>
+            <br>
+            <select id="sizeFFT" onchange="callback(stream)">
+                <option value="2048">Tamaño del búfer: 2048</option>
+                <option value="4096">Tamaño del búfer: 4096</option>
+                <option value="8192" selected>Tamaño del búfer: 8192</option>
+            </select>
+            <select id="window">
+                <option value="None">Ventana: Ninguna</option>
+                <option value="Cosine">Ventana: Coseno</option>
+                <option value="Hanning">Ventana: Hanning</option>
+                <option value="BH7" selected>Window: Blackman Harris 7</option>
+            </select>
+            <select id="FFT" onchange="SetDefaultWindow()">
+                <option value="myFFT" selected>FFT Function: Custom FFT</option>
+                <option value="WebAudio">FFT Function: Web Audio</option>
+            </select>
+
+            <input type="range" id="zoomRange" min="0" max="100" value="100">
+            <button onclick="zoomIn()">Zoom In</button>
+            <button onclick="zoomOut()">Zoom Out</button>
+            <br>
+        </div>
+        <br>
+        <div id="block_container">
+            <canvas class="canvas" style="border:3px solid;"></canvas>
+        </div>
+        
+    </div>
+    <script src="./js-colormaps.js"></script>
+    <script src="./spectrogram.js"></script>
+    <br>
+    <br>
+    <h3>IIAP, BY CRISTIAN RODRIGUEZ </h3>
+</body>
+
+</html>

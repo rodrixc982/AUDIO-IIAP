@@ -1,0 +1,31 @@
+{
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^16.0.0",
+    "electron-builder": "^22.11.7"
+  },
+  "build": {
+    "appId": "com.my-electron-app",
+    "productName": "My Electron App",
+    "win": {
+      "target": "nsis",
+      "icon": "src/img/IIAP-Logo.ico"
+    },
+    "mac": {
+      "icon": "src/img/IIAP-Logo.ico"
+    },
+    "linux": {
+      "icon": "src/img/IIAP-Logo.icog"
+    }
+  }
+}
