@@ -1,9 +1,12 @@
 # AUDIO-IIAP
 
-instalar :
+instalar : depedencia 
 
+verifica que Node.js
 
-  depedencia 
+node -v
+npm -v
+
 
 npm init -y
 
